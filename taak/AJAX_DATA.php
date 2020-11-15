@@ -10,24 +10,26 @@ if (!$conn) {
 }
 
 $sql = "SELECT id, waarde, tijd FROM data_iot WHERE id = ?";
-
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $_GET['q']);
 $stmt->execute();
 $stmt->store_result();
 $stmt->bind_result($id, $waarde, $tijd);
-$stmt->fetch();
+
+while($row = $stmt->fetch())
+{
+	echo "<table>";
+	echo "<tr>";
+	echo "<th>id</th>";
+	echo "<td>" . $id . "</td>";
+	echo "<th>tijd</th>";
+	echo "<td>" . $tijd . "</td>";
+	echo "<th>waarde</th>";
+	echo "<td>" . $waarde . "</td>";
+	echo "</tr>";	
+}
+echo "</table>";
 $stmt->close();
 
-echo "<table>";
-echo "<tr>";
-echo "<th>id</th>";
-echo "<td>" . $id . "</td>";
-echo "<th>tijd</th>";
-echo "<td>" . $tijd . "</td>";
-echo "<th>waarde</th>";
-echo "<td>" . $waarde . "</td>";
-echo "</tr>";
-echo "</table>";
 
 ?>
