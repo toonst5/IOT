@@ -108,6 +108,54 @@ $(document).ready(function() {
 });
 </script>
 
+<script>
+window.onload = function() {
+
+var dataPoints = [];
+
+var options =  {
+	animationEnabled: true,
+	theme: "light2",
+	title: {
+		text: "tijd"
+	},
+	axisX: {
+		valueFormatString: "DD MMM YYYY",
+	},
+	axisY: {
+		title: "waarde",
+		titleFontSize: 24
+	},
+	axisY2: {
+		title: "waarde2",
+		titleFontSize: 24
+	},
+	data: [{
+		type: "spline", 
+		yValueFormatString: "#,###.##",
+		dataPoints: dataPoints
+	}]
+};
+
+function addData(data) {
+	for (var i = 0; i < data.length; i++) {
+		dataPoints.push({
+			x: new Date(data[i].tijd),
+			y: data[i].waarde
+		});
+	}
+	$("#chartContainer").CanvasJSChart(options);
+
+}
+$.getJSON("http://www.student.pxl-ea-ict.be/11902966/jQuery/data.php", addData);
+
+}
+</script>
+
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
 
 </body>
 </html>
