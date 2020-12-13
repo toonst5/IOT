@@ -1,0 +1,27 @@
+
+<form action="a"> 
+  <select name="sensorPush" onchange="PushSensors(this.value)">
+    <option value="">Select a sensor:</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+  </select>
+</form>
+<br>
+
+<script>
+function PushSensors(str) {
+  var xhttp;  
+  if (str == "") {
+    document.getElementById("txtHint").innerHTML = "";
+    return;
+  }
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("txtHint").innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "push.php?a=,b=,c="+stra+strb+strc, true);
+  xhttp.send();
+}
+</script>
