@@ -9,21 +9,21 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$sql="SELECT * FROM Data WHERE ID = 1";
+$sql="SELECT * FROM data_iot WHERE id = 1";
 $result = mysqli_query($conn,$sql);
 
 $dataPoints=array();
 while($row = mysqli_fetch_array($result)) {
-	$Time=strtotime($row['Tijd'])*1000;
-	$dataPoints[]=array("x"=>$Time,"y"=>$row['Waarde']);  	
+	$Time=strtotime($row['tijd'])*1000;
+	$dataPoints[]=array("x"=>$Time,"y"=>$row['waarde']);  	
 }
-$sql="SELECT * FROM Data WHERE ID = 2";
+$sql="SELECT * FROM data_iot WHERE id = 2";
 $result = mysqli_query($conn,$sql);
 
 $dataPoints2=array();
 while($row = mysqli_fetch_array($result)) {
-	$Time=strtotime($row['Tijd'])*1000;
-	$dataPoints2[]=array("x"=>$Time,"y"=>$row['Waarde']);
+	$Time=strtotime($row['tijd'])*1000;
+	$dataPoints2[]=array("x"=>$Time,"y"=>$row['waarde']);
    	
 }
 mysqli_close($conn);
@@ -39,7 +39,7 @@ var dataPoints = [];
 var options =  {
 	animationEnabled: true,
 	zoomEnabled: true,
-	theme: "dark1",
+	theme: "light1",
 	title: {
 		text: "Grafiek sensoren"
 	},
@@ -54,21 +54,21 @@ var options =  {
 		itemclick: toggleDataSeries
 	},
 	data: [{
-		type: "spline",
+		type: "line",
 		name: "Temperatuur",
-		markerSize: 1,
+		markerSize: 5,
 		xValueFormatString: "DD/MM/YYYY hh;mm;ss",
 		xValueType: "dateTime",
 		yValueFormatString: "#,##0.##°C",
 		showInLegend: true,
 		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
 	},{
-		type: "spline",
-		name: "Licht",
-		markerSize: 1,
+		type: "line",
+		name: "humititie",
+		markerSize: 5,
 		xValueFormatString: "DD/MM/YYYY hh;mm;ss",
 		xValueType: "dateTime",
-		yValueFormatString: "#,##0.##lm",
+		yValueFormatString: "#,##0.##l%",
 		showInLegend: true,
 		dataPoints: <?php echo json_encode($dataPoints2, JSON_NUMERIC_CHECK); ?>
 	}]

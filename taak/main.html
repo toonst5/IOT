@@ -15,38 +15,6 @@ th,td {
 </head>
 <body>
 
-<h2>table tada</h2>
-
-<form action=""> 
-  <select name="ids" onchange="showids(this.value)">
-    <option value="">Select a id:</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-  </select>
-</form>
-<br>
-<div id="txtHint">id data will be listed here...</div>
-
-<script>
-function showids(str) {
-  var xhttp;  
-  if (str == "") {
-    document.getElementById("txtHint").innerHTML = "";
-    return;
-  }
-  xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("txtHint").innerHTML = this.responseText;
-    }
-  };
-  xhttp.open("GET", "AJAX_DATA.php?q="+str, true);
-  xhttp.send();
-}
-</script>
-
-
 
 
 
@@ -109,87 +77,39 @@ $(document).ready(function() {
 });
 </script>
 
+<iframe src="http://www.student.pxl-ea-ict.be/11902966/taak/steal.php" width="1200" height="400"></iframe>
+
+<h2>table tada</h2>
+
+<form action=""> 
+  <select name="ids" onchange="showids(this.value)">
+    <option value="">Select a id:</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+</form>
+<br>
+<div id="txtHint">id data will be listed here...</div>
+
 <script>
-window.onload = function() {
-
-var dataPoints = [];
-
-var options =  {
-	animationEnabled: true,
-	theme: "light2",
-	title: {
-		text: "tijd"
-	},
-	axisX: {
-		valueFormatString: "DD MMM YYYY",
-	},
-	axisY: {
-		title: "waarde",
-		titleFontSize: 24
-	},
-	axisY2: {
-		title: "waarde2",
-		titleFontSize: 24
-	},
-	data: [{
-		type: "spline", 
-		yValueFormatString: "#,###.##",
-		dataPoints: dataPoints
-	}]
-};
-
-function addData(data) {
-	for (var i = 0; i < data.length; i++) {
-		dataPoints.push({
-			x: new Date(data[i].tijd),
-			y: data[i].waarde
-		});
-	}
-	$("#chartContainer").CanvasJSChart(options);
-
-}
-$.getJSON("http://www.student.pxl-ea-ict.be/11902966/jQuery/data.php", addData);
-
-}
-</script>
-
-<canvas id="myChart" width="400" height="400"></canvas>
-<script>
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: 'data',
-            data: [10, 100, 20, 100, 50, 100],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
+function showids(str) {
+  var xhttp;  
+  if (str == "") {
+    document.getElementById("txtHint").innerHTML = "";
+    return;
+  }
+  xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("txtHint").innerHTML = this.responseText;
     }
-});
-function addData(chart, label, data) {
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
-    });
-    chart.update();
+  };
+  xhttp.open("GET", "AJAX_DATA.php?q="+str, true);
+  xhttp.send();
 }
 </script>
+
 
 <div id="chartContainer" style="height: 300px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
