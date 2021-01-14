@@ -18,7 +18,7 @@ th,td {
 
 
 
-<div style="margin: auto;width: 60%;">
+<!-- <div style="margin: auto;width: 60%;">
 	<div class="alert alert-success alert-dismissible" id="success" style="display:none;">
 	  <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
 	</div>
@@ -48,7 +48,7 @@ $(document).ready(function() {
 		var waarde = $('#waarde').val();
 		if(id!="" && waarde!=""){
 			$.ajax({
-				url: "save.php",
+				url: "http://www.student.pxl-ea-ict.be/11902966/taak/save.php",
 				type: "POST",
 				data: {
 					id:id,
@@ -75,11 +75,26 @@ $(document).ready(function() {
 		}
 	});
 });
-</script>
+</script> -->
+
+<form action="http://www.student.pxl-ea-ict.be/11902966/taak/request.php" method="POST">
+  <div>
+    <label for="id">id</label>
+    <input name="id" id="id" value="welke sensor">
+  </div>
+  <div>
+    <label for="waarde">waarde</label>
+    <input name="waarde" id="waarde" value="waarde van de sensor">
+  </div>
+  <div>
+    <button>Send</button>
+  </div>
+</form>
 
 <iframe src="http://www.student.pxl-ea-ict.be/11902966/taak/steal.php" width="1200" height="400"></iframe>
+<iframe src="http://www.student.pxl-ea-ict.be/11902966/taak/api.php" width="200" height="250"></iframe>
 
-<h2>table tada</h2>
+<h2>table data</h2>
 
 <form action=""> 
   <select name="ids" onchange="showids(this.value)">
@@ -109,7 +124,6 @@ function showids(str) {
   xhttp.send();
 }
 </script>
-
 
 
 <div id="chartContainer" style="height: 300px; width: 100%;"></div>

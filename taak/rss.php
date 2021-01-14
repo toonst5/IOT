@@ -15,4 +15,3 @@
 
 </channel>
 </rss>
-//https://www.w3schools.in/php/php-rss-feed/
